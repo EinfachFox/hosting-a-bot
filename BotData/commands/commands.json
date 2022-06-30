@@ -1,0 +1,159 @@
+{
+  "command": [
+    {
+      "name": "warn",
+      "actions": [
+        {
+          "name": "warn user",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "varname": "warn user",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "warnreason",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "varname": "warnreasion",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "2+"
+        },
+        {
+          "name": "+1 warn",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "user": "${tempVars.warn user.id}",
+          "field": "warns",
+          "oper": "+",
+          "value": "1"
+        },
+        {
+          "name": "deletemessages_2",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "sendwarnmessage",
+          "category": "Message",
+          "type": "Send Embed",
+          "fields": [
+            {
+              "name": "**Wer**",
+              "value": "${tempVars.warn user.displayName}",
+              "inline": "true"
+            },
+            {
+              "name": "Grund",
+              "value": "${tempVars.warnreasion}",
+              "inline": "true"
+            }
+          ],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FF0000",
+          "title": "Warn User",
+          "url": "",
+          "authorname": "CYFOX#0001",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Ein User wurde gewarnt",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "warns",
+      "actions": [
+        {
+          "name": "warns user",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "varname": "warns user",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "get warns",
+          "category": "User Data",
+          "type": "Get User Data",
+          "user": "${tempVars.warns user.id}",
+          "field": "warns",
+          "varname": "warns",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "deletemessages",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "warns message",
+          "category": "Message",
+          "type": "Send Embed",
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FF29EA",
+          "title": "Warn List von User ist:",
+          "url": "",
+          "authorname": "CYFOX#0001",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Der User: ${tempVars.warns user.displayName} hat ${tempVars.warns} Warn/s",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "unwarn",
+      "actions": [
+        {
+          "name": "unwarn user",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "varname": "unwarn user",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "set warns to 0",
+          "category": "User Data",
+          "type": "Set User Data",
+          "user": "${tempVars.unwarn user.id}",
+          "field": "warns",
+          "fieldvalue": "0"
+        },
+        {
+          "name": "unwarnmessage",
+          "category": "Message",
+          "type": "Send Message",
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "messagetext": "Die Warns von User: ${tempVars.warn user.displayName} wurden zurückgesetzt",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "deletemessages_1",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        }
+      ]
+    }
+  ]
+}

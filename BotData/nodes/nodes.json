@@ -1,0 +1,558 @@
+{
+  "nodes": [
+    {
+      "type": "command",
+      "name": "warn",
+      "guid": "cfb501fc-9d97-419e-b178-cefc05f759d5",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "07a45e8e-1f7a-4951-b0dc-d28047cf9271"
+          ]
+        }
+      ],
+      "x": 17,
+      "y": 74
+    },
+    {
+      "type": "response",
+      "name": "warn user",
+      "guid": "07a45e8e-1f7a-4951-b0dc-d28047cf9271",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "acc73691-a790-45ad-bb88-682fc06653d6"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "cfb501fc-9d97-419e-b178-cefc05f759d5"
+        }
+      ],
+      "x": 188,
+      "y": 65,
+      "rtype": "Variable",
+      "rsubtype": "Get Mentioned User",
+      "formdata": [
+        "warn user",
+        "User",
+        "temp"
+      ],
+      "formnames": [
+        "varname",
+        "vartype",
+        "saveVarType"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "warnreason",
+      "guid": "acc73691-a790-45ad-bb88-682fc06653d6",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "warnreasion",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "99f913cc-1f53-4901-b225-db667a88fe79",
+            "15073d42-5b65-4981-8caa-b4624dd3804e"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "07a45e8e-1f7a-4951-b0dc-d28047cf9271"
+        }
+      ],
+      "x": 365,
+      "y": 67,
+      "rtype": "Variable",
+      "rsubtype": "Store Value in Variable",
+      "formdata": [
+        "warnreasion",
+        "Text",
+        "temp",
+        "2+"
+      ],
+      "formnames": [
+        "varname",
+        "vartype",
+        "saveVarType",
+        "param"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "+1 warn",
+      "guid": "99f913cc-1f53-4901-b225-db667a88fe79",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "caaabe36-7619-4e8b-99c7-005b968f3cff"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "acc73691-a790-45ad-bb88-682fc06653d6"
+        }
+      ],
+      "x": 541,
+      "y": 69,
+      "rtype": "User Data",
+      "rsubtype": "Edit User Data",
+      "formdata": [
+        "${tempVars.warn user.id}",
+        "warns",
+        "+",
+        "1"
+      ],
+      "formnames": [
+        "user",
+        "field",
+        "oper",
+        "value"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "sendwarnmessage",
+      "guid": "caaabe36-7619-4e8b-99c7-005b968f3cff",
+      "reactionFields": [],
+      "embedfields": [
+        {
+          "name": "**Wer**",
+          "value": "${tempVars.warn user.displayName}",
+          "inline": "true"
+        },
+        {
+          "name": "Grund",
+          "value": "${tempVars.warnreasion}",
+          "inline": "true"
+        }
+      ],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "99f913cc-1f53-4901-b225-db667a88fe79"
+        }
+      ],
+      "x": 710,
+      "y": 65,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "FF0000",
+        "Warn User",
+        "",
+        "CYFOX#0001",
+        "",
+        "",
+        "Ein User wurde gewarnt",
+        "",
+        "",
+        "",
+        "false",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ]
+    },
+    {
+      "type": "command",
+      "name": "warns",
+      "guid": "9c24cdc3-fe20-4dfb-bbde-5213fb69484c",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "6d2d88a3-21d5-4d65-9133-18fcf8354cdb"
+          ]
+        }
+      ],
+      "x": 23,
+      "y": 193
+    },
+    {
+      "type": "response",
+      "name": "get warns",
+      "guid": "1000d834-5060-4f13-85c4-7615c72774d3",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "warns",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "24b29130-61d3-49cf-9155-e3c7444a4ee2"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "6d2d88a3-21d5-4d65-9133-18fcf8354cdb"
+        }
+      ],
+      "x": 365,
+      "y": 209,
+      "rtype": "User Data",
+      "rsubtype": "Get User Data",
+      "formdata": [
+        "${tempVars.warns user.id}",
+        "warns",
+        "warns",
+        "temp",
+        "User"
+      ],
+      "formnames": [
+        "user",
+        "field",
+        "varname",
+        "saveVarType",
+        "vartype"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "warns user",
+      "guid": "6d2d88a3-21d5-4d65-9133-18fcf8354cdb",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "1000d834-5060-4f13-85c4-7615c72774d3",
+            "31ac4a65-9a86-4735-9a8b-41c00c02613c"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "9c24cdc3-fe20-4dfb-bbde-5213fb69484c"
+        }
+      ],
+      "x": 191,
+      "y": 186,
+      "rtype": "Variable",
+      "rsubtype": "Get Mentioned User",
+      "formdata": [
+        "warns user",
+        "User",
+        "temp"
+      ],
+      "formnames": [
+        "varname",
+        "vartype",
+        "saveVarType"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "warns message",
+      "guid": "24b29130-61d3-49cf-9155-e3c7444a4ee2",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "1000d834-5060-4f13-85c4-7615c72774d3"
+        }
+      ],
+      "x": 546,
+      "y": 190,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "FF29EA",
+        "Warn List von User ist:",
+        "",
+        "CYFOX#0001",
+        "",
+        "",
+        "Der User: ${tempVars.warns user.displayName} hat ${tempVars.warns} Warn/s",
+        "",
+        "",
+        "",
+        "false",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ]
+    },
+    {
+      "type": "command",
+      "name": "unwarn",
+      "guid": "36e290d6-8fad-487e-9a8f-d25e422f496d",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "ba933086-fd50-4e60-a5fe-b2f2c97186e4"
+          ]
+        }
+      ],
+      "x": 26,
+      "y": 300
+    },
+    {
+      "type": "response",
+      "name": "unwarn user",
+      "guid": "ba933086-fd50-4e60-a5fe-b2f2c97186e4",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "b5c80ae1-4f3f-4930-8d76-94ebb1bdc750"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "36e290d6-8fad-487e-9a8f-d25e422f496d"
+        }
+      ],
+      "x": 195,
+      "y": 310,
+      "rtype": "Variable",
+      "rsubtype": "Get Mentioned User",
+      "formdata": [
+        "unwarn user",
+        "User",
+        "temp"
+      ],
+      "formnames": [
+        "varname",
+        "vartype",
+        "saveVarType"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "set warns to 0",
+      "guid": "b5c80ae1-4f3f-4930-8d76-94ebb1bdc750",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "69113d46-6aab-44e7-83a2-3d2071e3f977",
+            "3c1d38e4-c29e-4b2d-9a44-4b5002173a5d"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "ba933086-fd50-4e60-a5fe-b2f2c97186e4"
+        }
+      ],
+      "x": 373,
+      "y": 329,
+      "rtype": "User Data",
+      "rsubtype": "Set User Data",
+      "formdata": [
+        "${tempVars.unwarn user.id}",
+        "warns",
+        "0"
+      ],
+      "formnames": [
+        "user",
+        "field",
+        "fieldvalue"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "unwarnmessage",
+      "guid": "69113d46-6aab-44e7-83a2-3d2071e3f977",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "b5c80ae1-4f3f-4930-8d76-94ebb1bdc750"
+        }
+      ],
+      "x": 558,
+      "y": 326,
+      "rtype": "Message",
+      "rsubtype": "Send Message",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "Die Warns von User: ${tempVars.warn user.displayName} wurden zurückgesetzt",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelName",
+        "messageText",
+        "saveToVariable",
+        "saveToVariableType"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "deletemessages",
+      "guid": "31ac4a65-9a86-4735-9a8b-41c00c02613c",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "6d2d88a3-21d5-4d65-9133-18fcf8354cdb"
+        }
+      ],
+      "x": 723,
+      "y": 191,
+      "rtype": "Channel Action",
+      "rsubtype": "Delete All Messages",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "1"
+      ],
+      "formnames": [
+        "channelname",
+        "msgcount"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "deletemessages_1",
+      "guid": "3c1d38e4-c29e-4b2d-9a44-4b5002173a5d",
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "b5c80ae1-4f3f-4930-8d76-94ebb1bdc750"
+        }
+      ],
+      "x": 737,
+      "y": 326,
+      "rtype": "Channel Action",
+      "rsubtype": "Delete All Messages",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "1"
+      ],
+      "formnames": [
+        "channelname",
+        "msgcount"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "deletemessages_2",
+      "guid": "15073d42-5b65-4981-8caa-b4624dd3804e",
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "acc73691-a790-45ad-bb88-682fc06653d6"
+        }
+      ],
+      "x": 874,
+      "y": 64,
+      "rtype": "Channel Action",
+      "rsubtype": "Delete All Messages",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "1"
+      ],
+      "formnames": [
+        "channelname",
+        "msgcount"
+      ]
+    }
+  ]
+}

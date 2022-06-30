@@ -1,0 +1,92 @@
+{
+  "command": [
+    {
+      "name": "User Joins Server",
+      "perms": [],
+      "actions": [
+        {
+          "name": "join",
+          "category": "Message",
+          "type": "Send Message",
+          "channelname": "𝐑𝐞𝐠𝐞𝐥𝐧┃☝",
+          "messagetext": "Hey ${tempVars.newuser.displayName} und Willkommen auf denn Server von CYFOX wir begüßen sie Herzlich Willkommen",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "user": "newuser"
+      }
+    },
+    {
+      "name": "Any Message",
+      "perms": [],
+      "actions": [
+        {
+          "name": "checkuserdata",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "add warn roles",
+              "category": "User Action",
+              "type": "Add Role to User",
+              "user": "${tempVars.msguser.id}",
+              "rolename": "Ticket Support"
+            }
+          ],
+          "falseActions": [],
+          "user": "${tempVars.msguser.id}",
+          "field": "warns",
+          "compare": "greater than",
+          "value": "3"
+        },
+        {
+          "name": "checkuserdata_1",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "removeroles",
+              "category": "User Action",
+              "type": "Remove Role From User",
+              "user": "${tempVars.msguser.id}",
+              "rolename": "Ticket Support",
+              "reason": "Warn System"
+            }
+          ],
+          "falseActions": [],
+          "user": "${tempVars.msguser.id}",
+          "field": "warns",
+          "compare": "less than",
+          "value": "4"
+        }
+      ],
+      "var": {
+        "user": "msguser"
+      }
+    },
+    {
+      "name": "User Kicked",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "kickuser"
+      }
+    },
+    {
+      "name": "User Banned",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "banuser"
+      }
+    },
+    {
+      "name": "Bot Initialization",
+      "perms": [],
+      "actions": [],
+      "var": {}
+    }
+  ]
+}
